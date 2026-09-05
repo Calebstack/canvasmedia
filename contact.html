@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us — Get a Free Quote | Canvas Media Walls</title>
+<meta name="description" content="Contact Canvas Media Walls for bespoke media wall installation across Cheshire & UK-wide. Call 07704 669437 or send photos via WhatsApp.">
+<link rel="icon" type="image/png" href="assets/images/logo.png">
+<link rel="apple-touch-icon" href="assets/images/logo.png">
+<link rel="stylesheet" href="assets/css/style.css">
+<!-- Leaflet CSS & JS for Interactive Cheshire Live Map -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+</head>
+<body>
+
+  <nav class="site-nav">
+    <div class="wrap">
+      <a class="brandmark" href="index.html">
+        <img src="assets/images/logo.png" alt="Canvas Media Walls UK Logo">
+        <span>Canvas&nbsp;Media&nbsp;Walls</span>
+      </a>
+      <div class="navlinks">
+        <a href="index.html">Home</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="process.html">How It Works</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="contact.html" class="active">Contact</a>
+      </div>
+      <a class="btn nav-cta" href="contact.html">Get a free quote</a>
+      <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <div class="mobile-navlinks">
+        <a href="index.html">Home</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="process.html">How It Works</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="contact.html" class="active">Contact</a>
+        <a class="btn nav-cta" href="contact.html">Get a free quote</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Image Background Header for Contact Page -->
+  <header class="page-header">
+    <div class="page-header-bg">
+      <img src="assets/images/canvas_media_photo_1.jpg" alt="Contact Header Background">
+    </div>
+    <div class="wrap">
+      <span class="kicker">Let's Bring Your Wall To Life</span>
+      <h1>Ready to turn your wall into a canvas?</h1>
+      <p>Send a photo of your room, message us on WhatsApp, or complete our quick consultation form below for an instant supply &amp; fit quotation.</p>
+    </div>
+  </header>
+
+  <section>
+    <div class="wrap">
+      <div class="contact-wrapper">
+
+        <!-- Interactive Contact Form -->
+        <div class="contact-form-card">
+          <h3>Request Your Free Consultation</h3>
+          <p>Fill in your details below and our design team will reply with a detailed quote within hours.</p>
+
+          <form id="quoteForm" onsubmit="handleFormSubmit(event)">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="fullName">Full Name *</label>
+                <input type="text" id="fullName" class="form-control" placeholder="e.g. Sarah Jenkins" required>
+              </div>
+
+              <div class="form-group">
+                <label for="phone">Phone Number *</label>
+                <input type="tel" id="phone" class="form-control" placeholder="e.g. 07704 669437" required>
+              </div>
+
+              <div class="form-group">
+                <label for="email">Email Address *</label>
+                <input type="email" id="email" class="form-control" placeholder="e.g. sarah@example.com" required>
+              </div>
+
+              <div class="form-group">
+                <label for="postcode">Postcode / City *</label>
+                <input type="text" id="postcode" class="form-control" placeholder="e.g. Cheshire / CW9" required>
+              </div>
+
+              <div class="form-group">
+                <label for="packageSelect">Preferred Package</label>
+                <select id="packageSelect" class="form-control">
+                  <option value="essential" selected>Essential Wall (£2,650 - Most Popular)</option>
+                  <option value="signature">Signature Bespoke (£3,450)</option>
+                  <option value="executive">Executive Luxury Suite (£4,850+)</option>
+                  <option value="custom">Bespoke Custom Idea</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="wallWidth">Wall Width</label>
+                <input type="text" id="wallWidth" class="form-control" placeholder="e.g. 3.5 metres / 11 feet">
+              </div>
+
+              <div class="form-group full">
+                <label for="message">Project Details &amp; Special Requests</label>
+                <textarea id="message" class="form-control" placeholder="Tell us about your TV size, electric fire preferences, or any acoustic slat features..."></textarea>
+              </div>
+
+              <div class="form-group full">
+                <label>Room Photo / Video (Optional)</label>
+                <div style="border:2px dashed var(--line); border-radius:var(--radius-sm); padding:20px; text-align:center; background:#ffffff; cursor:pointer;" onclick="document.getElementById('fileUpload').click()">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a9673c" stroke-width="2" style="margin:0 auto 8px auto;"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                  <div style="font-size:14px; font-weight:600; color:var(--ink);">Click to upload wall photo or video</div>
+                  <div style="font-size:12.5px; color:var(--stone); margin-top:2px;" id="fileNameDisplay">PNG, JPG, MP4 up to 25MB</div>
+                  <input type="file" id="fileUpload" style="display:none;" onchange="updateFileName(this)">
+                </div>
+              </div>
+            </div>
+
+            <button type="submit" class="btn" style="width:100%; margin-top:24px; padding:16px; font-size:16px;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              Submit Consultation Request
+            </button>
+
+            <div class="form-success" id="formSuccess">
+              ✓ Thank you! Your request has been received. One of our design specialists will contact you shortly with your quotation.
+            </div>
+          </form>
+        </div>
+
+        <!-- Iconified Contact Details -->
+        <div style="display:flex; flex-direction:column; gap:20px;">
+          
+          <div class="detail-card">
+            <div class="detail-card-head">
+              <div class="icon-box whatsapp-bg">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+              </div>
+              <div>
+                <span class="label">Instant WhatsApp Chat</span>
+                <br>
+                <a href="https://wa.me/447704669437" target="_blank" rel="noopener">07704 669437</a>
+              </div>
+            </div>
+            <p class="note">Fastest way to get a quote &mdash; send photos &amp; wall dimensions directly.</p>
+          </div>
+
+          <div class="detail-card">
+            <div class="detail-card-head">
+              <div class="icon-box">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              </div>
+              <div>
+                <span class="label">Phone &amp; SMS</span>
+                <br>
+                <a href="tel:+447704669437">07704 669437</a>
+              </div>
+            </div>
+            <p class="note">Direct line to our installation team &mdash; available across Cheshire &amp; UK.</p>
+          </div>
+
+          <div class="detail-card">
+            <div class="detail-card-head">
+              <div class="icon-box">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+              <div>
+                <span class="label">Direct Email</span>
+                <br>
+                <a href="mailto:canvasmediawalls@gmail.com" style="font-size:16px;">canvasmediawalls@gmail.com</a>
+              </div>
+            </div>
+            <p class="note">Best for floor plans, architect drawings, and large photo files.</p>
+          </div>
+
+          <div class="detail-card">
+            <div class="detail-card-head">
+              <div class="icon-box">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+              </div>
+              <div>
+                <span class="label">Instagram Direct Message</span>
+                <br>
+                <a href="https://www.instagram.com/canvasmediawalls" target="_blank" rel="noopener">@canvasmediawalls</a>
+              </div>
+            </div>
+            <p class="note">Explore live project stories, videos, and DM us your room photo.</p>
+          </div>
+
+          <div class="detail-card">
+            <div class="detail-card-head">
+              <div class="icon-box">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+              </div>
+              <div>
+                <span class="label">Facebook Page</span>
+                <br>
+                <a href="https://www.facebook.com/people/Canvas-Media-Walls-UK/61591434186828/" target="_blank" rel="noopener" style="font-size:17px;">Canvas Media Walls UK</a>
+              </div>
+            </div>
+            <p class="note">Message us on Messenger or check client reviews.</p>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Cheshire Live Map Section -->
+  <section class="map-section">
+    <div class="wrap">
+      <div class="map-wrapper">
+        <div class="map-info">
+          <div class="map-badge">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Cheshire HQ &amp; UK Service Radius
+          </div>
+          <h2>Serving Cheshire &amp; Clients Nationwide.</h2>
+          <p>Our installation teams operate directly out of Cheshire, fitting bespoke media walls across Cheshire, Manchester, Merseyside, Lancashire, the Midlands, and nationwide.</p>
+          <a class="btn ghost-light" href="https://www.bing.com/maps/search?v=2&pc=FACEBK&mid=8100&mkt=en-GB&fbclid=IwY2xjawUI32VwZG9mAWV4dG4DYWVtAjEwAGJyaWQRMVpuS2hPOGFpOGtVN0lrNTRzcnRjBmFwcF9pZBAyMjIwMzkxNzg4MjAwODkyAAEeIYX8LJWVV3yZVbYZ2gxYBQGn-9kb7ZEirFSkutw6ZKAOwkSXsbPLTSI-IMw_aem_YgPhhGDgPDmEd88Wo4zk1w&FORM=FBKPL1&q=Cheshire+&cp=53.244829%7E-2.529368&lvl=9.6&style=r" target="_blank" rel="noopener">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+            Open Live Bing Map Location &rarr;
+          </a>
+        </div>
+
+        <div>
+          <div id="cheshire-map"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div>
+        <a class="footer-brand" href="index.html">
+          <img src="assets/images/logo.png" alt="Canvas Media Walls Logo">
+          <span>Canvas Media Walls</span>
+        </a>
+        <p>Turning your blank canvas into a work of art. Bespoke media wall design, supply, and installation serving clients across Cheshire and UK-wide.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Explore Navigation</h4>
+        <ul>
+          <li><a href="index.html">Home Page</a></li>
+          <li><a href="gallery.html">Photo Gallery</a></li>
+          <li><a href="process.html">How It Works</a></li>
+          <li><a href="pricing.html">Pricing Packages</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Get In Touch</h4>
+        <ul>
+          <li>
+            <a href="tel:+447704669437">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              07704 669437
+            </a>
+          </li>
+          <li>
+            <a href="https://wa.me/447704669437" target="_blank" rel="noopener">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+              WhatsApp: 07704 669437
+            </a>
+          </li>
+          <li>
+            <a href="mailto:canvasmediawalls@gmail.com">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              canvasmediawalls@gmail.com
+            </a>
+          </li>
+          <li>
+            <a href="https://www.instagram.com/canvasmediawalls" target="_blank" rel="noopener">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+              Instagram: @canvasmediawalls
+            </a>
+          </li>
+          <li>
+            <a href="https://www.facebook.com/people/Canvas-Media-Walls-UK/61591434186828/" target="_blank" rel="noopener">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+              Facebook: Canvas Media Walls UK
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="wrap foot-bar-centered">
+      <div>&copy; 2026 Canvas Media Walls UK. All rights reserved.</div>
+      <a href="https://www.bing.com/maps/search?v=2&pc=FACEBK&mid=8100&mkt=en-GB&fbclid=IwY2xjawUI32VwZG9mAWV4dG4DYWVtAjEwAGJyaWQRMVpuS2hPOGFpOGtVN0lrNTRzcnRjBmFwcF9pZBAyMjIwMzkxNzg4MjAwODkyAAEeIYX8LJWVV3yZVbYZ2gxYBQGn-9kb7ZEirFSkutw6ZKAOwkSXsbPLTSI-IMw_aem_YgPhhGDgPDmEd88Wo4zk1w&FORM=FBKPL1&q=Cheshire+&cp=53.244829%7E-2.529368&lvl=9.6&style=r" target="_blank" rel="noopener" class="badge-uk">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Available Across Cheshire &amp; UK-Wide
+      </a>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script>
+    // Form submission feedback
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      document.getElementById('formSuccess').style.display = 'block';
+      document.getElementById('quoteForm').reset();
+      document.getElementById('fileNameDisplay').innerText = 'PNG, JPG, MP4 up to 25MB';
+    }
+
+    function updateFileName(input) {
+      if (input.files && input.files[0]) {
+        document.getElementById('fileNameDisplay').innerText = 'Selected file: ' + input.files[0].name;
+      }
+    }
+
+    // Initialize Leaflet Live Map for Cheshire (53.244829, -2.529368)
+    document.addEventListener('DOMContentLoaded', function() {
+      const map = L.map('cheshire-map').setView([53.244829, -2.529368], 9.6);
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(map);
+
+      // Custom Marker Popup
+      const marker = L.marker([53.244829, -2.529368]).addTo(map);
+      marker.bindPopup(`
+        <div style="font-family:'Archivo',sans-serif; padding:4px;">
+          <strong style="color:#a9673c; font-size:14px;">Canvas Media Walls UK</strong><br>
+          <span style="font-size:12.5px; color:#333;">Cheshire Service Hub &amp; UK Installation</span><br>
+          <a href="https://wa.me/447704669437" target="_blank" style="color:#25D366; font-weight:bold; font-size:12px; text-decoration:none; display:inline-block; margin-top:6px;">WhatsApp 07704 669437 &rarr;</a>
+        </div>
+      `).openPopup();
+    });
+  </script>
+
+</body>
+</html>
