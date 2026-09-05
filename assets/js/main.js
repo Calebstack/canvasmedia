@@ -45,8 +45,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // 3. Scroll Reveal Animations for Sections & Cards
-  var revealElements = document.querySelectorAll('.value-item, .framed, .process-step-card, .pricing-card, .faq-item, .contact-form-card, .detail-card, .cta-band, .values, .dense-gallery-grid');
+  // 3. Scroll Reveal Animations for Sections & Cards (exclude nested gallery items to ensure instant rendering)
+  var revealElements = document.querySelectorAll('.value-item, .process-step-card, .pricing-card, .faq-item, .contact-form-card, .detail-card, .cta-band');
   revealElements.forEach(function(el) {
     el.classList.add('reveal-on-scroll');
   });
@@ -60,15 +60,14 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       });
     }, {
-      threshold: 0.12,
-      rootMargin: '0px 0px -40px 0px'
+      threshold: 0.08,
+      rootMargin: '0px 0px -20px 0px'
     });
 
     revealElements.forEach(function(el) {
       observer.observe(el);
     });
   } else {
-    // Fallback if IntersectionObserver is not supported
     revealElements.forEach(function(el) {
       el.classList.add('reveal-in');
     });
